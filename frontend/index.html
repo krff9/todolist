@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Личен планер за задачи към седмичната програма на 10.Б">
+  <title>10.Б | Училищен планер</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Начало">
+        <span class="brand-mark">10<span>.</span>Б</span>
+        <span class="brand-copy"><strong>Училищен планер</strong><small>Първа АЕГ · София</small></span>
+      </a>
+      <div class="topbar-meta"><span class="status-dot"></span><span id="storageStatus">Локално запазване</span></div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">Седмица · 15.09.2026 — 02.02.2027</p>
+          <h1>Твоята седмица,<br><em>подредена.</em></h1>
+          <p class="intro-text">Добавяй домашни, проекти и малки напомняния директно към часа, за който се отнасят.</p>
+        </div>
+        <div class="week-summary" aria-label="Обобщение">
+          <div><strong id="todoCount">0</strong><span>активни задачи</span></div>
+          <div><strong id="todayCount">0</strong><span>за днес</span></div>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Филтри">
+        <div class="section-label">Седмична програма</div>
+        <div class="filters" role="group" aria-label="Изглед на програмата">
+          <button class="filter-button active" data-filter="all">Всички дни</button>
+          <button class="filter-button" data-filter="today">Днес</button>
+          <button class="filter-button" data-filter="todos">Със задачи</button>
+        </div>
+      </section>
+
+      <section class="schedule-wrap">
+        <div class="schedule" id="schedule" aria-label="Седмична програма"></div>
+      </section>
+
+      <section class="todo-section" id="tasks">
+        <div class="section-heading"><div><p class="eyebrow">Фокус</p><h2>Моите задачи</h2></div><button class="button button-primary" id="openTodo">+ Нова задача</button></div>
+        <div class="todo-layout">
+          <div class="todo-list" id="todoList"></div>
+          <aside class="tip-panel"><span class="tip-icon">↗</span><p><strong>Малък ритуал</strong><br>Преди края на деня добави всичко, което не искаш да носиш в главата си утре.</p></aside>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>10.Б · 2026/2027</span><span>Създадено за по-спокойни учебни дни</span></footer>
+  </div>
+
+  <dialog id="todoDialog">
+    <form method="dialog" id="todoForm">
+      <div class="dialog-head"><div><p class="eyebrow">Нова задача</p><h2>Добави към деня</h2></div><button class="icon-button" value="cancel" aria-label="Затвори">×</button></div>
+      <label>Какво трябва да направиш?
+        <input name="title" required maxlength="120" placeholder="Напр. Упражнения 1–5 от учебника" autofocus>
+      </label>
+      <div class="form-grid">
+        <label>Ден<select name="day" id="daySelect"></select></label>
+        <label>Час<select name="period" id="periodSelect"></select></label>
+      </div>
+      <div class="form-grid">
+        <label>Краен срок<input name="dueDate" type="date"></label>
+        <label>Приоритет<select name="priority"><option value="normal">Нормален</option><option value="high">Висок</option><option value="low">Нисък</option></select></label>
+      </div>
+      <label>Бележка <span class="optional">по желание</span><textarea name="notes" rows="3" maxlength="300" placeholder="Линк, страница или кратка бележка"></textarea></label>
+      <div class="dialog-actions"><button class="button button-quiet" value="cancel">Отказ</button><button class="button button-primary" value="default">Запази задачата</button></div>
+    </form>
+  </dialog>
+  <script>window.SCHEDULE_API_BASE = window.SCHEDULE_API_BASE || '';</script>
+  <script src="app.js"></script>
+</body>
+</html>
