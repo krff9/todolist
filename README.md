@@ -24,3 +24,5 @@ GitHub Pages cannot run Python, so deploy the Flask API separately (for example 
 This repository includes `render.yaml`. In Render, choose **New > Blueprint**, connect `krff9/todolist`, and apply the blueprint. Render will install the backend requirements and start Gunicorn automatically. After deployment, check `https://YOUR-SERVICE.onrender.com/api/health` and then set `window.SCHEDULE_API_BASE` in `frontend/index.html` to `https://YOUR-SERVICE.onrender.com` before pushing the frontend change to GitHub.
 
 The current backend uses SQLite. Render's local filesystem is not intended for durable production data, so use a managed PostgreSQL database if todos must survive service recreation or redeployments.
+
+The workflow `.github/workflows/deploy-backend-render.yml` validates backend changes and can trigger a Render deploy hook. To let GitHub Actions start deployments explicitly, create a Render deploy hook for the `todolist-api` service and add its URL as the repository secret `RENDER_DEPLOY_HOOK_URL` under **Settings > Secrets and variables > Actions**. Without that secret, Render's native Git auto-deploy remains responsible for deployment.
