@@ -21,7 +21,7 @@ GitHub Pages cannot run Python, so deploy the Flask API separately (for example 
 
 ## Render backend
 
-This repository includes `render.yaml`. In Render, choose **New > Blueprint**, connect `krff9/todolist`, and apply the blueprint. Render will install the backend requirements and start Gunicorn automatically. After deployment, check `https://YOUR-SERVICE.onrender.com/api/health` and then set `window.SCHEDULE_API_BASE` in `frontend/index.html` to `https://YOUR-SERVICE.onrender.com` before pushing the frontend change to GitHub.
+This repository includes `render.yaml`. In Render, choose **New > Blueprint**, connect `krff9/todolist`, and apply the blueprint. The service root is set to `backend`, so Render installs `requirements.txt` from that directory and starts Gunicorn with `app:app`. After deployment, check `https://YOUR-SERVICE.onrender.com/api/health` and then set `window.SCHEDULE_API_BASE` in `frontend/index.html` to `https://YOUR-SERVICE.onrender.com` before pushing the frontend change to GitHub.
 
 The current backend uses SQLite. Render's local filesystem is not intended for durable production data, so use a managed PostgreSQL database if todos must survive service recreation or redeployments.
 
