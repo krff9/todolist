@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: todolist-api
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn --chdir backend app:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: CORS_ORIGINS
+        value: https://krff9.github.io

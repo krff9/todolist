@@ -18,3 +18,9 @@ Open `frontend/index.html` directly for the static version. Todos are saved in b
 The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` publishes the `frontend/` directory to GitHub Pages. Enable Pages in the repository settings with **GitHub Actions** as the source.
 
 GitHub Pages cannot run Python, so deploy the Flask API separately (for example on Render, Railway, or a VPS), then set `window.SCHEDULE_API_BASE` to that URL. The app still works without an API using local storage.
+
+## Render backend
+
+This repository includes `render.yaml`. In Render, choose **New > Blueprint**, connect `krff9/todolist`, and apply the blueprint. Render will install the backend requirements and start Gunicorn automatically. After deployment, check `https://YOUR-SERVICE.onrender.com/api/health` and then set `window.SCHEDULE_API_BASE` in `frontend/index.html` to `https://YOUR-SERVICE.onrender.com` before pushing the frontend change to GitHub.
+
+The current backend uses SQLite. Render's local filesystem is not intended for durable production data, so use a managed PostgreSQL database if todos must survive service recreation or redeployments.
